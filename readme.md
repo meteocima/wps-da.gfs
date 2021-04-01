@@ -1,34 +1,18 @@
 # wps-da.gfs
-docker container that allows to run WPS workflow using GFS dataset as input.
+
+docker container that allows to run WPS workflows using GFS dataset as input.
 
 
+## How to obtain the docker image
 
+The pre-build image is publicly [available on Docker Hub](https://hub.docker.com/repository/docker/cimafoundation/wps-da.gfs) 
 
-* wps-da.gfs: container to run WPS based on input from gfs model
+## Run gfs container
 
-## Build
-
-To build the images, after you clone the repo locally:
-
-
-
-### Build ifs and gfs WPS image
-
-```bash
-cd wps-da.gfs
-docker build .
-docker tag <resulting image id> cimafoundation/wps-da.gfs
-cd ../wps-da.ifs
-docker build .
-docker tag <resulting image id> cimafoundation/wps-da.ifs
-```
-
-## Run ifs or gfs container
-
-Both containers expect three volumes to be mounted
+This container expect three volumes to be mounted
 under /output, /input and /geogrid. 
 
-You must put gfs or ifs files under /input; static geo
+You must put gfs files under /input; static geo
 data under /geogrid; /output will contains resulting file.
 
 The procedure within the container also make use of three
@@ -39,6 +23,7 @@ environment variables
 
 > Beware: for each date in the range you choose, a set of files will be prepared to run a simulation in that date. 
 > That means that if you need to prepare a single simulation, you have to specify one single date, even if the forecast itself last for more than one day.
+
 
 - WPS_MODE - type of simulation you want to prepare. It can assume following values:
 'WARMUP', 'WARMUPDA', 'WRF' or 'WRFDA'
