@@ -107,3 +107,8 @@ and boundary conditions for the three phases of assimilation
 for domain 1 (files wrfbdy_d01_da<NN>)
 
 
+## License
+
+[MIT License](LICENSE)
+
+Copyright (c) 2021 Fondazione CIMA
