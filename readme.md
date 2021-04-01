@@ -77,3 +77,33 @@ docker run -it \
     -e "WPS_MODE=WRFDA" \
     cimafoundation/wps-da.gfs
 ```
+
+If the container completes successfully, you should see
+on stdout the message "RUN FOR DATE 2020073100 COMPLETED"
+
+The output directory will contains following files:
+
+output/
+output/20200731
+output/20200731/wrfbdy_d01_da03
+output/20200731/wrfbdy_d01_da02
+output/20200731/wrfinput_d01
+output/20200731/wrfbdy_d01_da01
+output/20200731/wrfinput_d03
+output/20200731/wrfinput_d02
+output/arguments.txt
+
+You can copy the output directory as-is to the HPC environment
+in order to run the WRFDA simulation.
+
+arguments.txt contains the config path to use on HPC, and
+a list of the dates to run (that's the main ones you requested, plus 
+warmup runs where needed for warmup).
+
+For each of this dates, a separate subdirectory
+of output is produced (output/20200731 in the example), 
+that contains start conditions for the three domains (files wrfinput_d<NN>)
+and boundary conditions for the three phases of assimilation
+for domain 1 (files wrfbdy_d01_da<NN>)
+
+
