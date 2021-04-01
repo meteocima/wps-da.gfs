@@ -16,7 +16,7 @@ You must put gfs files under /input; static geo
 data under /geogrid; /output will contains resulting file.
 
 The procedure within the container also make use of three
-environment variables
+environment variables:
 
 - WPS_START_DATE - first date of the range you want to prepare
 - WPS_END_DATE - last date of the range you want to prepare
@@ -40,3 +40,40 @@ environment variables
     These two set of data are the "warmup" data.
     The other WPS execution prepares the normal WRF simulation (with assimilation) from $WPS_START_DATE to $WPS_END_DATE. Warmup data it's actually used by Risico simulation.
    
+
+## Example
+
+This example shows how to run the workflow for the date 
+2020073100, mounting output, input and geogrid 
+volumes under respective subdirectories of working dir.
+
+output directory must be empty.
+input directory should 
+contains GFS input data under directory 2020/07/30/1800:
+
+```
+2020073018_anl_daita.grb  
+2020073018_f011_daita.grb  
+2020073018_f023_daita.grb
+
+...
+
+2020073018_f035_daita.grb  
+2020073018_f047_daita.grb
+```
+
+geogrid directory should contains static geogrid data.
+
+Given these three folder content, you can run the container using this command:
+
+```bash
+docker run -it \
+    --shm-size=64G \
+    -v $PWD/output:/output \
+    -v $PWD/input/:/input \
+    -v $PWD/geogrid/:/geogrid \
+    -e "WPS_START_DATE=2020073100" \
+    -e "WPS_END_DATE=2020073100" \
+    -e "WPS_MODE=WRFDA" \
+    cimafoundation/wps-da.gfs
+```
