@@ -18,11 +18,8 @@ data under /geogrid; /output will contains resulting file.
 The procedure within the container also make use of three
 environment variables:
 
-- WPS_START_DATE - first date of the range you want to prepare
-- WPS_END_DATE - last date of the range you want to prepare
-
-> Beware: for each date in the range you choose, a set of files will be prepared to run a simulation in that date. 
-> That means that if you need to prepare a single simulation, you have to specify one single date, even if the forecast itself last for more than one day.
+- WPS_START_DATE - start date and time gor the main forecast
+- WPS_HOURS - duration of the main forecast, defaults to 48
 
 
 - WPS_MODE - type of simulation you want to prepare. It can assume following values:
@@ -73,7 +70,7 @@ docker run -it \
     -v $PWD/input/:/input \
     -v $PWD/geogrid/:/geogrid \
     -e "WPS_START_DATE=2020073100" \
-    -e "WPS_END_DATE=2020073100" \
+    -e "WPS_HOURS=48" \
     -e "WPS_MODE=WRFDA" \
     cimafoundation/wps-da.gfs
 ```
